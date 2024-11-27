@@ -1,176 +1,213 @@
-# kos000113-universal Library
+▎kos000113-universal Library
 
-kos000113-universal — это библиотека Python, предоставляющая различные функции для работы с данными, шифрованием и управлением JSON-файлами. Она включает в себя утилиты для создания ключей, работы с базами данных и генерации сертификатов.
+kos000113-universal is a Python library that provides various functions for data manipulation, encryption, and JSON file management. It includes utilities for key generation, database operations, and certificate generation.
 
-## Установка
+▎Installation
 
-Вы можете установить библиотеку с помощью `pip`. Просто выполните следующую команду:
+You can install the library using pip. Just run the following command:
 
-```bash
 pip install kos000113-universal
-```
 
-## Использование
 
-### Импортирование библиотеки
+▎Usage
 
-Чтобы использовать библиотеку, вы можете импортировать необходимые классы и методы следующим образом:
+▎Importing the Library
 
-```python
+To use the library, you can import the necessary classes and methods as follows:
+
 import kos000113-universal
-```
 
-### Примеры использования
 
-#### Работа с шифрованием
+▎Usage Examples
 
-Key - Должен быть 32 байта и зашифрован в base64
-Iv - Init Vector должен быть 32 байта и зашифрован в base64
+▎Working with Encryption
 
-```python
-# Пример использования функций шифрования
+Key - Must be 32 bytes and encoded in base64  
+Iv - Initialization Vector must be 32 bytes and encoded in base64
+
+# Example of using encryption functions
 crypter = kos000113-universal.crypter()
-data_to_encrypt = "Секретные данные"
+data_to_encrypt = "Secret data"
 encrypted_data = crypter.crypt_data(data_to_encrypt, key, Iv)
 decrypted_data = crypter.decrypt_data(encrypted_data, key, Iv)
-print(decrypted_data)  # Вывод: Секретные данные
-```
+print(decrypted_data)  # Output: Secret data
 
-#### Работа с базой данных
 
-db_name (str): Имя базы данных, к которой нужно подключиться.
-SQL_request (str): SQL-запрос для выполнения на базе данных.
-params (Tuple[Any]): Параметры для SQL-запроса. По умолчанию пустой кортеж.
-formatted (bool): Нужно ли возвращать данные в "красивом" формате. 
-                Пример: [(1,), (2,), (3,)] - без форматирования. 
-                [1, 2, 3] - с форматированием.
-method (str): Метод получения данных; может быть 'fetchone', 'fetchall' или 'fetchmany'.
-size (int): Количество записей для метода 'fetchmany'.
+▎Working with Database
 
-```python
-# Пример использования функций работы с базой данных
+• db_name (str): The name of the database to connect to.
+
+• SQL_request (str): The SQL query to execute on the database.
+
+• params (Tuple[Any]): Parameters for the SQL query. Defaults to an empty tuple.
+
+• formatted (bool): Whether to return data in a "pretty" format. 
+  Example: [(1,), (2,), (3,)] - without formatting. 
+  [1, 2, 3] - with formatting.
+
+• method (str): The method for retrieving data; can be 'fetchone', 'fetchall', or 'fetchmany'.
+
+• size (int): The number of records for the 'fetchmany' method.
+
+# Example of using database functions
 db = kos000113-universal.Database()
 db.create_db("my_database.db", SQL_request, params)
 data = db.get_data("my_database.db", SQL_request, params, formatted, method, size)
 print(data)
-```
 
-#### Генерация ключей
 
-```python
-# Пример генерации ключей
+▎Key Generation
+
+# Example of key generation
 key_gen = kos000113-universal.GenerateKey()
 keys = key_gen.create_keys()
-print(keys) # вывод список с 2 элементами
+print(keys)  # Output: list with 2 elements
 
 random_key = key_gen.generate_random_key(128)
-print(random_key) # чисто строка
-```
+print(random_key)  # Output: random string
 
-#### Работа с JSON-файлами
 
-```python
-# Пример работы с JSON-файлами
+▎Working with JSON Files
+
+# Example of working with JSON files
 json_handler = kos000113-universal.JsonHandler()
-result = json_handler.update_data("data.json", "ключ", "значение")
-print(result) # Вывод словаря
+result = json_handler.update_data("data.json", "key", "value")
+print(result)  # Output: dictionary
 
 data = json_handler.get_data("data.json")
-print(data) # Вывод словаря
-```
+print(data)  # Output: dictionary
 
-#### Генерация сертификатов
 
-```python
-# Пример генерации сертификатов
+▎Certificate Generation
+
+# Example of certificate generation
 cer_gen = kos000113-universal.GenerateCustomCer()
 cer = cer_gen.generate_cer_SDTP("example.com")
-print(cer) # Нужен для моего будущего проекта
-```
+print(cer)  # Needed for my future project
 
-## Документация функций
 
-### 1. Шифрование (crypter.py)
+▎Function Documentation
 
-- **crypt_data(data: str) -> str**
-  - Шифрует данные.
-  - **Параметры:**
-    - `data`: строка, которую нужно зашифровать.
-  - **Возвращает:** Зашифрованную строку.
+▎1. Encryption (crypter.py)
 
-- **decrypt_data(encrypted_data: str) -> str**
-  - Дешифрует данные.
-  - **Параметры:**
-    - `encrypted_data`: строка, которую нужно расшифровать.
-  - **Возвращает:** Расшифрованную строку.
+• crypt_data(data: str) -> str
 
-### 2. Работа с базой данных (database.py)
+  • Encrypts data.
 
-- **create_db(db_name: str) -> None**
-  - Создает новую базу данных.
-  - **Параметры:**
-    - `db_name`: имя базы данных.
+  • Parameters:
 
-- **get_data(db_name: str) -> Union[Dict[str, Any], str]**
-  - Получает данные из базы данных.
-  - **Параметры:**
-    - `db_name`: имя базы данных.
-  - **Возвращает:** Словарь с данными или сообщение об ошибке.
+    • data: string to be encrypted.
 
-- **execute_query(query: str) -> Union[str, None]**
-  - Выполняет SQL-запрос.
-  - **Параметры:**
-    - `query`: SQL-запрос для выполнения.
-  - **Возвращает:** Результат выполнения запроса или сообщение об ошибке.
+  • Returns: Encrypted string.
 
-### 3. Генерация ключей (generate_key.py)
+• decrypt_data(encrypted_data: str) -> str
 
-- **create_keys() -> Tuple[str, str]**
-  - Генерирует пару ключей.
-  - **Возвращает:** Ключи в виде кортежа.
+  • Decrypts data.
 
-- **generate_random_key(length: int) -> str**
-  - Генерирует случайный ключ заданной длины.
-  - **Параметры:**
-    - `length`: длина ключа.
-  - **Возвращает:** Случайный ключ.
+  • Parameters:
 
-### 4. Работа с JSON-файлами (json_mananger.py)
+    • encrypted_data: string to be decrypted.
 
-- *update_data(file_path: str, what_data: str, sama_data: Any) -> Union[str, None]*
-  - Обновляет данные в указанном JSON-файле.
-  - *Параметры:*
-    - `file_path`: путь к JSON-файлу.
-    - `what_data`: ключ, который нужно обновить.
-    - `sama_data`: новое значение для ключа.
-  - *Возвращает:* Сообщение об успешном обновлении или сообщение об ошибке.
+  • Returns: Decrypted string.
 
-- *get_data(file_path: str) -> Union[Dict[str, Any], str]*
-  - Получает данные из указанного JSON-файла.
-  - *Параметры:*
-    - `file_path`: путь к JSON-файлу.
-  - *Возвращает:* Словарь с данными или сообщение об ошибке.
+▎2. Database Operations (database.py)
 
-### 5. Генерация сертификатов (generate_custom_cer.py)
+• create_db(db_name: str) -> None
 
-- *generate_cer_SDTP(domain: str) -> str*
-  - Генерирует сертификат для указанного домена.
-  - *Параметры:*
-    - `domain`: доменное имя.
-  - *Возвращает:* Сгенерированный сертификат.
+  • Creates a new database.
 
-## Лицензия
+  • Parameters:
 
-Этот проект лицензирован под MIT License - подробности можно найти в файле [LICENSE](LICENSE).
+    • db_name: name of the database.
 
-## Контрибьюция
+• get_data(db_name: str) -> Union[Dict[str, Any], str]
 
-Если вы хотите внести свой вклад в проект, пожалуйста, создайте форк репозитория, внесите изменения и создайте Pull Request.
+  • Retrieves data from the database.
 
-## Автор
+  • Parameters:
 
-Ваше имя - [Konstantin Gorshkov](mailto:kostya_gorshkov_06@vk.com)
+    • db_name: name of the database.
 
-## Благодарности
+  • Returns: Dictionary with data or an error message.
 
-Спасибо за использование библиотеки kos000113-universal!
+• execute_query(query: str) -> Union[str, None]
+
+  • Executes anSQL query.
+
+  • Parameters:
+
+    • query: SQL query to execute.
+
+  • Returns: Result of the query execution or an error message.
+
+▎3. Key Generation (generate_key.py)
+
+• create_keys() -> Tuple[str, str]
+
+  • Generates a pair of keys.
+
+  • Returns: Keys as a tuple.
+
+• generate_random_key(length: int) -> str
+
+  • Generates a random key of the specified length.
+
+  • Parameters:
+
+    • length: length of the key.
+
+  • Returns: Random key.
+
+▎4. Working with JSON Files (json_manager.py)
+
+• update_data(file_path: str, what_data: str, sama_data: Any) -> Union[str, None]
+
+  • Updates data in the specified JSON file.
+
+  • Parameters:
+
+    • file_path: path to the JSON file.
+
+    • what_data: key to be updated.
+
+    • sama_data: new value for the key.
+
+  • Returns: Message about successful update or an error message.
+
+• get_data(file_path: str) -> Union[Dict[str, Any], str]
+
+  • Retrieves data from the specified JSON file.
+
+  • Parameters:
+
+    • file_path: path to the JSON file.
+
+  • Returns: Dictionary with data or an error message.
+
+▎5. Certificate Generation (generate_custom_cer.py)
+
+• generate_cer_SDTP(domain: str) -> str
+
+  • Generates a certificate for the specified domain.
+
+  • Parameters:
+
+    • domain: domain name.
+
+  • Returns: Generated certificate.
+
+▎License
+
+This project is licensed under the MIT License - details can be found in the LICENSE file.
+
+▎Contribution
+
+If you would like to contribute to the project, please fork the repository, make your changes, and create a Pull Request.
+
+▎Author
+
+Your name - Konstantin Gorshkov
+
+▎Acknowledgments
+
+Thank you for using the kos000113-universal
