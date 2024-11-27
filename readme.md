@@ -24,22 +24,34 @@ import kos000113-universal
 
 #### Работа с шифрованием
 
+Key - Должен быть 32 байта и зашифрован в base64
+Iv - Init Vector должен быть 32 байта и зашифрован в base64
+
 ```python
 # Пример использования функций шифрования
-crypter = kos000113-universal.Crypter()
+crypter = kos000113-universal.crypter()
 data_to_encrypt = "Секретные данные"
-encrypted_data = crypter.crypt_data(data_to_encrypt)
-decrypted_data = crypter.decrypt_data(encrypted_data)
+encrypted_data = crypter.crypt_data(data_to_encrypt, key, Iv)
+decrypted_data = crypter.decrypt_data(encrypted_data, key, Iv)
 print(decrypted_data)  # Вывод: Секретные данные
 ```
 
 #### Работа с базой данных
 
+db_name (str): Имя базы данных, к которой нужно подключиться.
+SQL_request (str): SQL-запрос для выполнения на базе данных.
+params (Tuple[Any]): Параметры для SQL-запроса. По умолчанию пустой кортеж.
+formatted (bool): Нужно ли возвращать данные в "красивом" формате. 
+                Пример: [(1,), (2,), (3,)] - без форматирования. 
+                [1, 2, 3] - с форматированием.
+method (str): Метод получения данных; может быть 'fetchone', 'fetchall' или 'fetchmany'.
+size (int): Количество записей для метода 'fetchmany'.
+
 ```python
 # Пример использования функций работы с базой данных
 db = kos000113-universal.Database()
-db.create_db("my_database.db")
-data = db.get_data("my_database.db")
+db.create_db("my_database.db", SQL_request, params)
+data = db.get_data("my_database.db", SQL_request, params, formatted, method, size)
 print(data)
 ```
 
@@ -49,10 +61,10 @@ print(data)
 # Пример генерации ключей
 key_gen = kos000113-universal.GenerateKey()
 keys = key_gen.create_keys()
-print(keys)
+print(keys) # вывод список с 2 элементами
 
 random_key = key_gen.generate_random_key(128)
-print(random_key)
+print(random_key) # чисто строка
 ```
 
 #### Работа с JSON-файлами
@@ -61,10 +73,10 @@ print(random_key)
 # Пример работы с JSON-файлами
 json_handler = kos000113-universal.JsonHandler()
 result = json_handler.update_data("data.json", "ключ", "значение")
-print(result)
+print(result) # Вывод словаря
 
 data = json_handler.get_data("data.json")
-print(data)
+print(data) # Вывод словаря
 ```
 
 #### Генерация сертификатов
@@ -73,7 +85,7 @@ print(data)
 # Пример генерации сертификатов
 cer_gen = kos000113-universal.GenerateCustomCer()
 cer = cer_gen.generate_cer_SDTP("example.com")
-print(cer)
+print(cer) # Нужен для моего будущего проекта
 ```
 
 ## Документация функций
