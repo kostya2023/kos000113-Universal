@@ -1,13 +1,13 @@
-# Universal Library
+# kos000113-universal Library
 
-Universal — это библиотека Python, предоставляющая различные функции для работы с данными, шифрованием и управлением JSON-файлами. Она включает в себя утилиты для создания ключей, работы с базами данных и генерации сертификатов.
+kos000113-universal — это библиотека Python, предоставляющая различные функции для работы с данными, шифрованием и управлением JSON-файлами. Она включает в себя утилиты для создания ключей, работы с базами данных и генерации сертификатов.
 
 ## Установка
 
 Вы можете установить библиотеку с помощью `pip`. Просто выполните следующую команду:
 
 ```bash
-pip install universal
+pip install kos000113-universal
 ```
 
 ## Использование
@@ -17,7 +17,7 @@ pip install universal
 Чтобы использовать библиотеку, вы можете импортировать необходимые классы и методы следующим образом:
 
 ```python
-import universal
+import kos000113-universal
 ```
 
 ### Примеры использования
@@ -26,7 +26,7 @@ import universal
 
 ```python
 # Пример использования функций шифрования
-crypter = universal.Crypter()
+crypter = kos000113-universal.Crypter()
 data_to_encrypt = "Секретные данные"
 encrypted_data = crypter.crypt_data(data_to_encrypt)
 decrypted_data = crypter.decrypt_data(encrypted_data)
@@ -37,7 +37,7 @@ print(decrypted_data)  # Вывод: Секретные данные
 
 ```python
 # Пример использования функций работы с базой данных
-db = universal.Database()
+db = kos000113-universal.Database()
 db.create_db("my_database.db")
 data = db.get_data("my_database.db")
 print(data)
@@ -47,7 +47,7 @@ print(data)
 
 ```python
 # Пример генерации ключей
-key_gen = universal.GenerateKey()
+key_gen = kos000113-universal.GenerateKey()
 keys = key_gen.create_keys()
 print(keys)
 
@@ -59,7 +59,7 @@ print(random_key)
 
 ```python
 # Пример работы с JSON-файлами
-json_handler = universal.JsonHandler()
+json_handler = kos000113-universal.JsonHandler()
 result = json_handler.update_data("data.json", "ключ", "значение")
 print(result)
 
@@ -71,7 +71,7 @@ print(data)
 
 ```python
 # Пример генерации сертификатов
-cer_gen = universal.GenerateCustomCer()
+cer_gen = kos000113-universal.GenerateCustomCer()
 cer = cer_gen.generate_cer_SDTP("example.com")
 print(cer)
 ```
@@ -161,4 +161,4 @@ print(cer)
 
 ## Благодарности
 
-Спасибо за использование библиотеки Universal!
+Спасибо за использование библиотеки kos000113-universal!
