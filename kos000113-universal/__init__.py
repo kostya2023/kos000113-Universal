@@ -31,7 +31,7 @@ class GenerateKey:
     create_keys = create_keys
     generate_random_key = generate_random_key
 
-class JsonHandler:
+class JsonMananger:
     update_data = update_data
     get_data = get_data
 

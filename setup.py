@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='kos000113-universal',  # Your library name
-    version='0.2.0',  # Version of your library
+    name='kos000113_universal',  # Your library name
+    version='0.3.0',  # Version of your library
     packages=find_packages(),  # Automatically find all packages
     install_requires=["pyOpenSSL", "tgcrypto"],  # Specify dependencies, if any
     author='Kostya',  # Your name
